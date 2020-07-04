@@ -26,18 +26,17 @@ keyboard.addEventListener('click', (e) => {
 
 /**
  * Listens for a key to be pressed on the physical keyboard, checks that the key pressed
- * is a letter (a-z/65-90). Loops through the on screen keyboard buttons until it gets to
+ * is a letter using regex. Loops through the on screen keyboard buttons until it gets to
  * the one that matches the button pressed on the physical keyboard, then calls the 
  * handleIntercation method with that button element.
  */
 window.addEventListener('keydown', (e) => {
-    e.preventDefault();
     const keyboardButtons = document.querySelectorAll('div button.key');
-    if (e.keyCode >= 65 && e.keyCode <= 90) {
+    if (/^[a-zA-z]$/.test(e.key)) {
         keyboardButtons.forEach(button => {
-            if (button.textContent === (String.fromCharCode(e.keyCode).toLowerCase())) {
+            if (button.textContent === (e.key.toLowerCase())) {
                 game.handleInteraction(button);
             }
-        });
+        })
     }
 });
