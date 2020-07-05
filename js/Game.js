@@ -1,18 +1,20 @@
 class Game {
     constructor() {
         this.missed = 0;
-        this.phrases = [];
+        this.phrases = this.createPhrases();
         this.activePhrase = null;
     }
 
     /**
      * Takes an array of phrases, uses each phrase to pass in to a new instance
-     * of the Phrase class, pushes this new Phrase instance to an array above
-     * in the Game class.
+     * of the Phrase class, pushes this new Phrase instance to an empty array
+     * and returns the new array.
      */
     createPhrases() {
         const chosenPhrases = ['Needle in a haystack', 'Go for broke', 'Under your nose', 'A piece of cake', 'Cut to the chase'];
-        chosenPhrases.forEach(phrase => this.phrases.push(new Phrase(phrase)));
+        const chosenPhrasesObjects = [];
+        chosenPhrases.forEach(phrase => chosenPhrasesObjects.push(new Phrase(phrase)));
+        return chosenPhrasesObjects;
     }
 
     /**
@@ -46,9 +48,6 @@ class Game {
         // Hides the inital overlay and shows the gameplay screen.
         const overlayDiv = document.getElementById('overlay');
         overlayDiv.style.display = 'none';
-
-        // Creates the phrase objects.
-        this.createPhrases();
 
         // Chooses random phrase object for game.
         const randPhrase = this.getRandomPhrase();
